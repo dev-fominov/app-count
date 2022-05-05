@@ -5,36 +5,42 @@ import './Count.css';
 
 function CountSetting() {
 
-	let [valueMax, setValueMax] = useState(0)
-	let [valueStart, setValueStart] = useState(0)
+	let [valueMax, setValueMax] = useState<string>('0')
+	let [valueStart, setValueStart] = useState<string>('0')
 
-	useEffect(()=>{
+	useEffect(() => {
 		let valueMax = localStorage.getItem('countValueMax')
-		let valueStart = localStorage.getItem('countValueMax')
-		if(valueMax) {
+		if (valueMax) {
 			let newValueMax = JSON.parse(valueMax)
 			setValueMax(newValueMax)
 		}
-		if(valueStart) {
+	}, [])
+	useEffect(() => {
+		let valueStart = localStorage.getItem('countValueStart')
+		if (valueStart) {
 			let newValueStart = JSON.parse(valueStart)
-			setValueMax(newValueStart)
+			setValueStart(newValueStart)
 		}
 	}, [])
 
-	useEffect(()=>{
-		localStorage.setItem('countValueMax', JSON.stringify(valueMax))
-		localStorage.setItem('countValueStart', JSON.stringify(valueStart))
-	}, [])
+	// useEffect(() => {
+	// 	localStorage.setItem('countValueMax', JSON.stringify(valueMax))
+	// }, [valueMax])
+
+	// useEffect(() => {
+	// 	localStorage.setItem('countValueStart', JSON.stringify(valueStart))
+	// }, [valueStart])
 
 	const onClickSetting = () => {
-		//code
+		localStorage.setItem('countValueMax', JSON.stringify(valueMax))
+		localStorage.setItem('countValueStart', JSON.stringify(valueStart))
 	}
 
 	const onChange = () => {
 		//code
 	}
 
-	
+
 
 	// const noActive = count === 10 ? " noActive" : ""
 
