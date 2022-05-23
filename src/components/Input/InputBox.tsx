@@ -2,8 +2,8 @@ import React, { ChangeEvent, useState } from "react";
 
 type boxInputType = {
 	title: string
-	value: string
-	onChange: (value: string)=>void
+	value: number
+	onChange: (value: number)=>void
 }
 
 function InputBox(props: boxInputType) {

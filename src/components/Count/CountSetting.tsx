@@ -3,55 +3,26 @@ import Button from "../Button/Button";
 import InputBox from "../Input/InputBox";
 import './Count.css';
 
-function CountSetting() {
+type CountSettingType = {
+	valueMax: number
+	valueStart: number
+	setValueMax: (value: number)=>void
+	setValueStart: (value: number)=>void
+	onClickSetting: ()=>void
+}
 
-	let [valueMax, setValueMax] = useState<string>('0')
-	let [valueStart, setValueStart] = useState<string>('0')
-
-	useEffect(() => {
-		let valueMax = localStorage.getItem('countValueMax')
-		if (valueMax) {
-			let newValueMax = JSON.parse(valueMax)
-			setValueMax(newValueMax)
-		}
-	}, [])
-	useEffect(() => {
-		let valueStart = localStorage.getItem('countValueStart')
-		if (valueStart) {
-			let newValueStart = JSON.parse(valueStart)
-			setValueStart(newValueStart)
-		}
-	}, [])
-
-	// useEffect(() => {
-	// 	localStorage.setItem('countValueMax', JSON.stringify(valueMax))
-	// }, [valueMax])
-
-	// useEffect(() => {
-	// 	localStorage.setItem('countValueStart', JSON.stringify(valueStart))
-	// }, [valueStart])
-
-	const onClickSetting = () => {
-		localStorage.setItem('countValueMax', JSON.stringify(valueMax))
-		localStorage.setItem('countValueStart', JSON.stringify(valueStart))
-	}
-
-	const onChange = () => {
-		//code
-	}
-
-
+function CountSetting(props: CountSettingType) {
 
 	// const noActive = count === 10 ? " noActive" : ""
 
 	return (
 		<div className={'countBlock'}>
 			<div className={'countSetting'}>
-				<InputBox title={'Max Value'} value={valueMax} onChange={setValueMax} />
-				<InputBox title={'Start Value'} value={valueStart} onChange={setValueStart} />
+				<InputBox title={'Max Value'} value={props.valueMax} onChange={props.setValueMax} />
+				<InputBox title={'Start Value'} value={props.valueStart} onChange={props.setValueStart} />
 			</div>
 			<div className={'buttonBox'}>
-				<Button disabled={false} name={'Set'} callBack={onClickSetting} />
+				<Button disabled={false} name={'Set'} callBack={props.onClickSetting} />
 			</div>
 		</div>
 	)

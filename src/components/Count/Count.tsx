@@ -2,26 +2,28 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 import './Count.css';
 
-function Count() {
+type CountType = {
+	valueMax: number
+	valueStart: number
+	count: number
+	onClickInc: ()=>void
+	onClickReset: ()=>void
+}
 
-	let [count, setCount] = useState<number>(1)
+function Count(props: CountType) {
+// debugger;
+	
 
-	const onClickInc = () => {
-		setCount(++count)
-	}
-
-	const onClickReset = () => {
-		setCount(0)
-	}
-
-	const noActive = count === 10 ? " noActive" : ""
-
+	const noActive = props.count === props.valueMax ? " noActive" : ""
+	// const countCNT = count === 0 ? props.valueStart : count
 	return (
+		
 		<div className={'countBlock'}>
-			<div className={'count' + noActive}>{count}</div>
+			
+			<div className={'count' + noActive}>{props.count}</div>
 			<div className={'buttonBox'}>
-				<Button disabled={count >= 10} name={'inc'} callBack={onClickInc} />
-				<Button disabled={count === 0} name={'reset'} callBack={onClickReset} />
+				<Button disabled={props.count >= props.valueMax} name={'inc'} callBack={props.onClickInc} />
+				<Button disabled={props.count === props.valueStart} name={'reset'} callBack={props.onClickReset} />
 			</div>
 		</div>
 	)
