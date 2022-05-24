@@ -1,3 +1,8 @@
+.App {
+	display: flex;
+	flex-direction: column;
+}
+
 .countBlock {
 	width: 500px;
 	height: 500px;
@@ -6,9 +11,11 @@
 	padding: 30px;
 	box-sizing: border-box;
 }
+
 .countBlock:not(:last-child) {
 	margin-right: 30px;
 }
+
 .count {
 	background-color: #63dafc;
 	height: 60%;
@@ -21,6 +28,7 @@
 	font-weight: 700;
 	margin-bottom: 30px;
 }
+
 .countSetting {
 	background-color: #63dafc;
 	height: 60%;
@@ -36,8 +44,18 @@
 	padding: 30px;
 	box-sizing: border-box;
 }
+
+.countSetting>div {
+	width: 100%;
+}
+
+.countSetting>div:not(:last-child) {
+	margin-bottom: 20px;
+}
+
 .count.noActive {
 	background-color: #3f7285;
+	color: #63dafc;
 }
 
 .buttonBox {
@@ -56,6 +74,31 @@
 	justify-content: space-between;
 	width: 100%;
 }
+
 .inputBox:not(:last-child) {
 	margin-bottom: 20px;
+}
+
+.inputBox input {
+	width: 100px;
+	height: 30px;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	border: 1px solid #f11545;
+	text-align: center;
+	font-size: 16px;
+}
+
+.classDisabled input {
+	background-color: #f11545;
+	color: #fff;
+}
+
+.noActiveBox {
+	display: none;
+}
+
+.activeBox {
+	display: block;
 }
