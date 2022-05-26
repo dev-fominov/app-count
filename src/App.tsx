@@ -27,10 +27,11 @@ function App() {
     localStorage.setItem('countValueMax', JSON.stringify(valueMax))
     localStorage.setItem('countValueStart', JSON.stringify(valueStart))
     setCount(valueStart)
-    setVisibleCount(true)
+    setVisibleCount(false)
   }
 
   let [count, setCount] = useState<number>(valueStart)
+
   const onClickInc = () => {
     setCount(count + 1)
   }
@@ -38,30 +39,34 @@ function App() {
     setCount(valueStart)
   }
 
-  let [visibleCount, setVisibleCount] = useState<boolean>(true)
+  let [visibleCount, setVisibleCount] = useState<boolean>(false)
+
   const onClickSettingOpen = () => {
-    setVisibleCount(false)
+    setVisibleCount(true)
   }
 
   return (
     <div className="App">
-      <CountSetting
-        valueMax={valueMax}
-        valueStart={valueStart}
-        setValueMax={setValueMax}
-        setValueStart={setValueStart}
-        onClickSetting={onClickSetting}
-        visibleCount={!visibleCount}
-      />
-      <Count
+     {
+       visibleCount && <CountSetting
+          valueMax={valueMax}
+          valueStart={valueStart}
+          setValueMax={setValueMax}
+          setValueStart={setValueStart}
+          onClickSetting={onClickSetting}
+        />
+     }
+      {
+        !visibleCount && <Count
         valueMax={valueMax}
         valueStart={valueStart}
         count={count}
         onClickInc={onClickInc}
         onClickReset={onClickReset}
         onClickSettingOpen={onClickSettingOpen}
-        visibleCount={visibleCount}
       />
+      }
+    
     </div>
   );
 }

@@ -9,17 +9,13 @@ type CountType = {
 	onClickInc: ()=>void
 	onClickReset: ()=>void
 	onClickSettingOpen: ()=>void
-	visibleCount: boolean
 }
 
 function Count(props: CountType) {
-
 	const noActive = props.count === props.valueMax ? " noActive" : ""
-	const visibleCountClass = props.visibleCount ? 'activeBox' : 'noActiveBox'
+
 	return (
-		
-		<div className={'countBlock ' + visibleCountClass}>
-			
+		<div className={'countBlock '}>
 			<div className={'count' + noActive}>{props.count}</div>
 			<div className={'buttonBox'}>
 				<Button disabled={props.count >= props.valueMax} name={'inc'} callBack={props.onClickInc} />
