@@ -7,7 +7,7 @@ export type initialStateType = typeof initialState
 export const countReduser = (state: initialStateType = initialState, action: actionType): initialStateType => {
 	switch (action.type) {
 		case 'ON-CLICK-INC': {
-			return state
+			return state + 1
 		}
 		case 'ON-CLICK-RESET': {
 			return state

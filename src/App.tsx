@@ -44,7 +44,7 @@ function App() {
   const onClickSettingOpen = () => {
     setVisibleCount(true)
   }
-
+ 
   return (
     <div className="App">
      {
