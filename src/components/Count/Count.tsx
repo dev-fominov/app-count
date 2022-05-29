@@ -8,7 +8,7 @@ type CountType = {
 	count: number
 	onClickInc: ()=>void
 	onClickReset: ()=>void
-	onClickSettingOpen: ()=>void
+	onClickSetting: ()=>void
 }
 
 function Count(props: CountType) {
@@ -20,7 +20,7 @@ function Count(props: CountType) {
 			<div className={'buttonBox'}>
 				<Button disabled={props.count >= props.valueMax} name={'inc'} callBack={props.onClickInc} />
 				<Button disabled={props.count === props.valueStart} name={'reset'} callBack={props.onClickReset} />
-				<Button disabled={false} name={'set'} callBack={props.onClickSettingOpen} />
+				<Button disabled={false} name={'set'} callBack={props.onClickSetting} />
 			</div>
 		</div>
 	)

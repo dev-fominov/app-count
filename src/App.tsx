@@ -1,48 +1,75 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './App.css';
+import { onClickIncAC, onClickResetAC, onClickSettingCountAC } from './bll/count-reduser';
+import { AppStateType } from './bll/store';
+import { setValueMaxAC } from './bll/valueMax-reduser';
+import { onClickSettingAC, setValueStartAC } from './bll/valueStart-reduser';
 import Count from './components/Count/Count';
 import CountSetting from './components/Count/CountSetting';
 
 function App() {
 
-  let [valueMax, setValueMax] = useState<number>(0)
-  let [valueStart, setValueStart] = useState<number>(0)
+  const count = useSelector<AppStateType, number>(state => state.count.count);
+  const valueStart = useSelector<AppStateType, number>(state => state.valueStart.valueStart);
+  const valueMax = useSelector<AppStateType, number>(state => state.valueMax.valueMax);
 
-  useEffect(() => {
-    let valueMax = localStorage.getItem('countValueMax')
-    if (valueMax) {
-      let newValueMax = JSON.parse(valueMax)
-      setValueMax(newValueMax)
-    }
-  }, [])
-  useEffect(() => {
-    let valueStart = localStorage.getItem('countValueStart')
-    if (valueStart) {
-      let newValueStart = JSON.parse(valueStart)
-      setValueStart(newValueStart)
-      setCount(newValueStart)
-    }
-  }, [])
-  const onClickSetting = () => {
-    localStorage.setItem('countValueMax', JSON.stringify(valueMax))
-    localStorage.setItem('countValueStart', JSON.stringify(valueStart))
-    setCount(valueStart)
-    setVisibleCount(false)
-  }
+  const dispatch = useDispatch()
 
-  let [count, setCount] = useState<number>(valueStart)
+  // console.log(valueMax)
+
+  // let [valueMax, setValueMax] = useState<number>(0)
+
+  // let [valueStart, setValueStart] = useState<number>(0)
+
+  // useEffect(() => {
+  //   let valueMax = localStorage.getItem('countValueMax')
+  //   if (valueMax) {
+  //     let newValueMax = JSON.parse(valueMax)
+  //     setValueMax(newValueMax)
+  //   }
+  // }, [])
+  // useEffect(() => {
+  //   let valueStart = localStorage.getItem('countValueStart')
+  //   if (valueStart) {
+  //     let newValueStart = JSON.parse(valueStart)
+  //     setValueStart(newValueStart)
+  //     setCount(newValueStart)
+  //   }
+  // }, [])
+  
+  // const onClickSetting = () => {
+  //   localStorage.setItem('countValueMax', JSON.stringify(valueMax))
+  //   localStorage.setItem('countValueStart', JSON.stringify(valueStart))
+  //   setCount(valueStart)
+  //   setVisibleCount(false)
+  // }
+
+  // let [count, setCount] = useState<number>(valueStart)
 
   const onClickInc = () => {
-    setCount(count + 1)
+    dispatch(onClickIncAC())
   }
   const onClickReset = () => {
-    setCount(valueStart)
+    // setCount(valueStart)
+    dispatch(onClickResetAC(valueStart))
   }
 
   let [visibleCount, setVisibleCount] = useState<boolean>(false)
 
-  const onClickSettingOpen = () => {
-    setVisibleCount(true)
+  const onClickSetting = () => {
+    setVisibleCount(!visibleCount)
+    dispatch(onClickSettingAC(valueStart, valueMax))
+    dispatch(onClickSettingCountAC(valueStart))
+  }
+
+  const setValueMax = (value: number) => {
+    dispatch(setValueMaxAC(value))
+  }
+
+  const setValueStart = (value: number) => {
+    dispatch(setValueStartAC(value))
   }
  
   return (
@@ -63,7 +90,7 @@ function App() {
         count={count}
         onClickInc={onClickInc}
         onClickReset={onClickReset}
-        onClickSettingOpen={onClickSettingOpen}
+        onClickSetting={onClickSetting}
       />
       }
     
