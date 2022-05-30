@@ -22,11 +22,14 @@ export const countReduser = (state: initialStateType = initialState, action: act
 				...state, count: action.valueStart
 			}
 		}
+		case 'SET-VALUE-LOCALSTORAGE': {
+			return {...state, count: action.valueStart }
+		}
 		default: return state
 	}
 }
 
-type actionType = onClickIncACType | onClickResetACType | onClickSettingCountACType
+type actionType = onClickIncACType | onClickResetACType | onClickSettingCountACType | setValuesLocalstorageACType
 
 type onClickIncACType = ReturnType<typeof onClickIncAC>
 export const onClickIncAC = () => {
@@ -46,5 +49,12 @@ type onClickSettingCountACType = ReturnType<typeof onClickSettingCountAC>
 export const onClickSettingCountAC = (valueStart: number) => {
 	return {
 		type: 'ON-CLICK-SETTING', valueStart
+	} as const
+}
+
+type setValuesLocalstorageACType = ReturnType<typeof setValuesLocalstorageAC>
+export const setValuesLocalstorageAC = (valueStart: number) => {
+	return {
+		type: 'SET-VALUE-LOCALSTORAGE', valueStart
 	} as const
 }

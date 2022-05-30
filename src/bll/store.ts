@@ -13,6 +13,11 @@ export const rootReducer = combineReducers({
 	valueStart: valueStartReduser
 });
 
+// let rew;
+// const wer = localStorage.getItem('app-state')
+// if(wer) {
+// rew = JSON.parse(wer)
+// }
 
 export const store = createStore(rootReducer, loadState());
 
